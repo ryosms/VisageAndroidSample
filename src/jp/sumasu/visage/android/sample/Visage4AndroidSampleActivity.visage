@@ -1,0 +1,23 @@
+package jp.sumasu.visage.android.sample;
+
+import visage.android.app.Activity;
+import visage.android.widget.LinearLayout;
+import visage.android.widget.Orientation;
+import visage.android.widget.TextView;
+
+/**
+ * Main Activity for Visage Android
+ * @author ryosms
+ *
+ */
+public class Visage4AndroidSampleActivity extends Activity {
+	override function onStart() {
+		view = LinearLayout {
+			orientation: Orientation.VERTICAL
+			TextView {
+				text: "Hello Visage World!"
+			}
+		}
+		super.onStart()
+	}
+}
