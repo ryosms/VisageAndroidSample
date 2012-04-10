@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	name="Visage Compile"
+	default="-compile-android"
+	basedir="."
+>
+	<description>Compiles the Visage source files in the project.</description>
+	<target name="-compile-android">
+		<condition
+			property="binary.extension"
+			value=".exe"
+			else=""
+		>
+			<os family="windows" />
+		</condition>
+		<property file="./visage.properties" />
+		<property file="./project.properties" />
+		<pathconvert property="android.classpath">
+			<path>
+				<fileset
+					dir="${android.sdk}/platforms/${target}"
+					includes="android.jar" />
+				<fileset
+					dir="${visage.home}/lib/shared"
+					includes="visagert.jar" />
+				<fileset
+					dir="${visage.home}/lib/mobile"
+					includes="visage-android.jar" />
+				<fileset
+					dir="${basedir}/lib"
+					includes="*.jar" />
+				<pathelement location="${basedir}/gen" />
+				<pathelement location="${basedir}/bin/classes" />
+			</path>
+		</pathconvert>
+		<pathconvert
+			property="visage.sources"
+			pathsep=" "
+		>
+			<path>
+				<fileset
+					dir="${basedir}/src"
+					includes="**/*.visage" />
+			</path>
+		</pathconvert>
+		<exec
+			executable="${visage.home}/bin/visagec${binary.extension}"
+			failonerror="true"
+			logerror="true"
+		>
+			<arg value="-d" />
+			<arg value="${basedir}/bin/classes" />
+			<arg value="-cp" />
+			<arg value="${android.classpath}" />
+			<arg line="${visage.sources}" />
+		</exec>
+	</target>
+</project>
