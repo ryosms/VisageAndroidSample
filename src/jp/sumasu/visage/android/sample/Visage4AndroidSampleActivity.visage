@@ -1,6 +1,10 @@
 package jp.sumasu.visage.android.sample;
 
+import android.widget.Toast;
 import visage.android.app.Activity;
+import visage.android.view.View;
+import visage.android.widget.Button;
+import visage.android.widget.EditText;
 import visage.android.widget.LinearLayout;
 import visage.android.widget.Orientation;
 import visage.android.widget.TextView;
@@ -14,9 +18,20 @@ public class Visage4AndroidSampleActivity extends Activity {
 	override function onStart() {
 		view = LinearLayout {
 			orientation: Orientation.VERTICAL
-			TextView {
-				text: "Hello Visage World!"
-			}
+			var secret:String
+			view:[
+				TextView {
+					text: "Hello Visage World!"
+				},
+			    EditText {
+			    	hint: "input some text"
+			    	password: true
+			    	text: bind secret with inverse
+			    },
+			    TextView {
+			    	text: bind secret
+			    }
+			]
 		}
 		super.onStart()
 	}
